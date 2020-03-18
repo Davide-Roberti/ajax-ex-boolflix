@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.card-movie {
+    margin-bottom: 5px;
+    border: 1px solid grey;
+    padding: 10px;
+    background-color: pink;
+}
+
+.erase {
+    display: none;
+}

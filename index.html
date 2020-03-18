@@ -11,7 +11,17 @@
     <body>
         <input type="text" name="" value="">
         <button type="button" name="button">CERCA</button>
+        <div class="informazioni-film"></div>
 
+        <!-- template provvisorio per handlebars -->
+        <script id="movie-info-template" type="text/x-handlebars-template">
+            <div class="card-movie">
+                <p>Titolo: {{titolo}}</p>
+                <p>Titolo originale: {{titoloOriginale}}</p>
+                <p>Lingua originale: {{linguaOriginale}}</p>
+                <p>Valutazione: {{voto}}</p>
+            </div>
+		</script>
         <script src="js/main.js" charset="utf-8"></script>
     </body>
 </html>
