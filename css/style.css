@@ -10,3 +10,12 @@
     padding: 10px;
     background-color: pink;
 }
+
+.card-movie .language {
+    position: relative;
+}
+
+.language img {
+    position: absolute;
+    bottom: 0;
+}

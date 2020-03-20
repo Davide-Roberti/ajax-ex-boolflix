@@ -34,6 +34,7 @@ $(document).ready(function () {
                     };
                     var specificheFilm = template(infoMovie);  //collegamento handlebars
                     $('.informazioni-film').append(specificheFilm);
+                    console.log(infoMovie.linguaOriginale);
                 }
             },
             error: function (err) {
@@ -41,8 +42,19 @@ $(document).ready(function () {
             }
         });
     };
+
     function stelleVoto (valutazione) {
         var recensione = Math.ceil(valutazione / 2);
-        return recensione;
+        var arrayStelleVoto = [];
+        var a = 0;
+        for (var i = 0; i < 5; i++) {
+            if (a < recensione) {
+                arrayStelleVoto.push('<i class="fas fa-star"></i>');
+                a = a + 1;
+            } else {
+                arrayStelleVoto.push('<i class="far fa-star"></i>');
+            }
+        }
+        return arrayStelleVoto.join('');
     };
 });
