@@ -29,7 +29,7 @@ $(document).ready(function () {
                     var infoMovie = {
                         titolo: movie.title,
                         titoloOriginale: movie.original_title,
-                        linguaOriginale: movie.original_language,
+                        linguaOriginale: bandierine(movie.original_language),
                         voto: stelleVoto(movie.vote_average)
                     };
                     var specificheFilm = template(infoMovie);  //collegamento handlebars
@@ -42,6 +42,23 @@ $(document).ready(function () {
             }
         });
     };
+
+    function bandierine (siglaNazione) {
+        console.log(siglaNazione);
+        var flag = '';
+        if (siglaNazione == 'en') {
+            flag = 'gb';
+        } else if (siglaNazione == 'ja') {
+            flag = 'jp';
+        } else if (siglaNazione == 'zh') {
+            flag = 'cn';
+        } else if (siglaNazione == 'ko') {
+            flag = 'kr';
+        } else {
+            flag = siglaNazione;
+        }
+        return '<img src="https://www.countryflags.io/' + flag + '/flat/16.png">'
+    }
 
     function stelleVoto (valutazione) {
         var recensione = Math.ceil(valutazione / 2);
