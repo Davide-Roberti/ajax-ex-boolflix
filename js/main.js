@@ -31,7 +31,8 @@ $(document).ready(function () {
                         titolo: movie.title,
                         titoloOriginale: movie.original_title,
                         linguaOriginale: bandierine(movie.original_language),
-                        voto: stelleVoto(movie.vote_average)
+                        voto: stelleVoto(movie.vote_average),
+                        copertina: posterCopertina(movie.poster_path)
                     };
                     var specificheFilm = template(infoMovie);  //collegamento handlebars
                     $('.informazioni-film').append(specificheFilm);
@@ -42,6 +43,12 @@ $(document).ready(function () {
                 alert('ERRORISSIMO!!!!!');
             }
         });
+    };
+
+    function posterCopertina (valoreApiCover) {
+        var urlBaseCover = 'https://image.tmdb.org/t/p/';
+        var dimensione = 'w185/';
+        return urlBaseCover + dimensione + valoreApiCover;
     };
 
     function cercaSerie (input) {
@@ -62,7 +69,8 @@ $(document).ready(function () {
                         titolo: serie.name,
                         titoloOriginale: serie.original_name,
                         linguaOriginale: bandierine(serie.original_language),
-                        voto: stelleVoto(serie.vote_average)
+                        voto: stelleVoto(serie.vote_average),
+                        copertina: posterCopertina(serie.poster_path)
                     };
                     var specificheSerie = template(infoSerie);  //collegamento handlebars
                     $('.informazioni-film').append(specificheSerie);
