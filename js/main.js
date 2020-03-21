@@ -10,10 +10,11 @@ $(document).ready(function () {
         $('.informazioni-film').empty();
         // console.log(chiaveRicerca);
         cercaFilm(chiaveRicerca);
+        cercaSerie(chiaveRicerca);
     });
 
     function cercaFilm (input) {
-        $.ajax({    //chiamata ajax al database di themoviedb
+        $.ajax({    //chiamata ajax al database di themoviedb per cercare i film
             url: urlBase + '/search/movie',
             data: {
                 api_key: '0e632fcee10ca9b473d029f3731bf937',
@@ -23,7 +24,7 @@ $(document).ready(function () {
             method: 'GET',
             success: function (data) {
                 var movies = data.results;
-                console.log(movies);
+                // console.log(movies);
                 for (var i = 0; i < movies.length; i++) {
                     var movie = movies[i];
                     var infoMovie = {
@@ -34,7 +35,7 @@ $(document).ready(function () {
                     };
                     var specificheFilm = template(infoMovie);  //collegamento handlebars
                     $('.informazioni-film').append(specificheFilm);
-                    console.log(infoMovie.linguaOriginale);
+                    // console.log(infoMovie.linguaOriginale);
                 }
             },
             error: function (err) {
@@ -42,6 +43,37 @@ $(document).ready(function () {
             }
         });
     };
+
+    function cercaSerie (input) {
+        $.ajax({    //chiamata ajax al database di themoviedb per cercare le serie tv
+            url: urlBase + '/search/tv',
+            data: {
+                api_key: '0e632fcee10ca9b473d029f3731bf937',
+                query: input,
+                language: 'it-IT'
+            },
+            method: 'GET',
+            success: function (data) {
+                var series = data.results;
+                console.log(series);
+                for (var i = 0; i < series.length; i++) {
+                    var serie = series[i];
+                    var infoSerie = {
+                        titolo: serie.name,
+                        titoloOriginale: serie.original_name,
+                        linguaOriginale: bandierine(serie.original_language),
+                        voto: stelleVoto(serie.vote_average)
+                    };
+                    var specificheSerie = template(infoSerie);  //collegamento handlebars
+                    $('.informazioni-film').append(specificheSerie);
+                }
+            },
+            error: function (err) {
+                alert('ERRORISSIMO!!!!!');
+            }
+        });
+    };
+
 
     function bandierine (siglaNazione) {
         console.log(siglaNazione);
