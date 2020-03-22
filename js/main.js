@@ -46,9 +46,13 @@ $(document).ready(function () {
     };
 
     function posterCopertina (valoreApiCover) {
-        var urlBaseCover = 'https://image.tmdb.org/t/p/';
-        var dimensione = 'w185/';
-        return urlBaseCover + dimensione + valoreApiCover;
+        if (valoreApiCover !== null) {
+            var urlBaseCover = 'https://image.tmdb.org/t/p/';
+            var dimensione = 'w185/';
+            return '<img src="' + urlBaseCover + dimensione + valoreApiCover + '">';
+        } else {
+            return 'no cover';
+        };
     };
 
     function cercaSerie (input) {
