@@ -48,7 +48,7 @@ $(document).ready(function () {
     function posterCopertina (valoreApiCover) {
         if (valoreApiCover !== null) {
             var urlBaseCover = 'https://image.tmdb.org/t/p/';
-            var dimensione = 'w185/';
+            var dimensione = 'w342/';
             return '<img src="' + urlBaseCover + dimensione + valoreApiCover + '">';
         } else {
             return 'no cover';
