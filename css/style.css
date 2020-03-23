@@ -42,10 +42,24 @@ header button {
 /* stilizzazione sezione principale */
 
 .card-movie {
-    margin-bottom: 5px;
-    border: 1px solid grey;
-    padding: 10px;
-    background-color: pink;
+    border: 2px solid white;
+    position: relative;
+}
+
+.card-movie .overlay {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: white;
+    background-color: black;
+    display: none;
+}
+
+.card-movie:hover .overlay {
+    display: block;
 }
 
 .card-movie .language {
