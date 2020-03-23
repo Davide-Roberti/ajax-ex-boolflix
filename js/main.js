@@ -21,7 +21,6 @@ $(document).ready(function () {
         }
     });
 
-
     function cercaShow (input, tipo) {
         $.ajax({    //chiamata ajax al database di themoviedb per cercare film e serie tv
             url: urlBase + '/search/' + tipo,

@@ -4,6 +4,43 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: sans-serif;
+    background-color: grey;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* stilizzazione header */
+
+header {
+    background-color: black;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    color: red;
+    margin: 10px 0;
+}
+
+header button {
+    border: none;
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 13px;
+    color: grey;
+}
+
+/* stilizzazione sezione principale */
+
 .card-movie {
     margin-bottom: 5px;
     border: 1px solid grey;
