@@ -19,3 +19,7 @@
     position: absolute;
     bottom: 0;
 }
+
+.card-movie img.cover {
+    width: 342px;
+}

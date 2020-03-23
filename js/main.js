@@ -54,9 +54,9 @@ $(document).ready(function () {
         if (valoreApiCover !== null) {
             var urlBaseCover = 'https://image.tmdb.org/t/p/';
             var dimensione = 'w342/';
-            return '<img src="' + urlBaseCover + dimensione + valoreApiCover + '">';
+            return '<img class="cover" src="' + urlBaseCover + dimensione + valoreApiCover + '">';
         } else {
-            return 'no cover';
+            return '<img class="cover" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flascrucesfilmfest.com%2Fwp-content%2Fuploads%2F2018%2F01%2Fno-poster-available.jpg&f=1&nofb=1">';
         };
     };
 
