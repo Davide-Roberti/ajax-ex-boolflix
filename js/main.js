@@ -6,11 +6,19 @@ $(document).ready(function () {
     var urlBase = 'https://api.themoviedb.org/3';
 
     $('button').click(function() { // al click del bottone salvo nella variabile chiaveRicerca l'input acquisito dall'HTML
-        var chiaveRicerca = $('input').val();
+        var chiaveRicerca = $('#ricerca').val();
         $('.informazioni-film').empty();
         // console.log(chiaveRicerca);
         cercaShow(chiaveRicerca, 'movie');
         cercaShow(chiaveRicerca, 'tv');
+    });
+
+    $('#ricerca').keydown(function(event) {
+        var chiaveRicerca = $('#ricerca').val();
+        if(event.keyCode == '13') {
+            cercaShow(chiaveRicerca, 'movie');
+            cercaShow(chiaveRicerca, 'tv');
+        }
     });
 
 
