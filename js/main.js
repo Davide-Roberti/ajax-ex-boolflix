@@ -9,13 +9,14 @@ $(document).ready(function () {
         var chiaveRicerca = $('input').val();
         $('.informazioni-film').empty();
         // console.log(chiaveRicerca);
-        cercaFilm(chiaveRicerca);
-        cercaSerie(chiaveRicerca);
+        cercaShow(chiaveRicerca, 'movie');
+        cercaShow(chiaveRicerca, 'tv');
     });
 
-    function cercaFilm (input) {
-        $.ajax({    //chiamata ajax al database di themoviedb per cercare i film
-            url: urlBase + '/search/movie',
+
+    function cercaShow (input, tipo) {
+        $.ajax({    //chiamata ajax al database di themoviedb per cercare film e serie tv
+            url: urlBase + '/search/' + tipo,
             data: {
                 api_key: '0e632fcee10ca9b473d029f3731bf937',
                 query: input,
@@ -23,21 +24,8 @@ $(document).ready(function () {
             },
             method: 'GET',
             success: function (data) {
-                var movies = data.results;
-                // console.log(movies);
-                for (var i = 0; i < movies.length; i++) {
-                    var movie = movies[i];
-                    var infoMovie = {
-                        titolo: movie.title,
-                        titoloOriginale: movie.original_title,
-                        linguaOriginale: bandierine(movie.original_language),
-                        voto: stelleVoto(movie.vote_average),
-                        copertina: posterCopertina(movie.poster_path)
-                    };
-                    var specificheFilm = template(infoMovie);  //collegamento handlebars
-                    $('.informazioni-film').append(specificheFilm);
-                    // console.log(infoMovie.linguaOriginale);
-                }
+                var dataShow = data.results;
+                createCard(dataShow);
             },
             error: function (err) {
                 alert('ERRORISSIMO!!!!!');
@@ -45,7 +33,24 @@ $(document).ready(function () {
         });
     };
 
-    function posterCopertina (valoreApiCover) {
+    function createCard (dataInput) {    //ciclo for per passare i valori a handlebars
+        for (var i = 0; i < dataInput.length; i++) {
+            var infoShow = dataInput[i];
+            var info = {
+                titoloSerie: infoShow.name,
+                titolo: infoShow.title,
+                titoloOriginaleSerie: infoShow.original_name,
+                titoloOriginale: infoShow.original_title,
+                linguaOriginale: bandierine(infoShow.original_language),
+                voto: stelleVoto(infoShow.vote_average),
+                copertina: posterCopertina(infoShow.poster_path)
+            };
+            var specificheShow = template(info);  //collegamento handlebars
+            $('.informazioni-film').append(specificheShow);
+        };
+    };
+
+    function posterCopertina (valoreApiCover) {   //funzione per aggiungere l'immagine di copertina
         if (valoreApiCover !== null) {
             var urlBaseCover = 'https://image.tmdb.org/t/p/';
             var dimensione = 'w342/';
@@ -55,39 +60,7 @@ $(document).ready(function () {
         };
     };
 
-    function cercaSerie (input) {
-        $.ajax({    //chiamata ajax al database di themoviedb per cercare le serie tv
-            url: urlBase + '/search/tv',
-            data: {
-                api_key: '0e632fcee10ca9b473d029f3731bf937',
-                query: input,
-                language: 'it-IT'
-            },
-            method: 'GET',
-            success: function (data) {
-                var series = data.results;
-                console.log(series);
-                for (var i = 0; i < series.length; i++) {
-                    var serie = series[i];
-                    var infoSerie = {
-                        titolo: serie.name,
-                        titoloOriginale: serie.original_name,
-                        linguaOriginale: bandierine(serie.original_language),
-                        voto: stelleVoto(serie.vote_average),
-                        copertina: posterCopertina(serie.poster_path)
-                    };
-                    var specificheSerie = template(infoSerie);  //collegamento handlebars
-                    $('.informazioni-film').append(specificheSerie);
-                }
-            },
-            error: function (err) {
-                alert('ERRORISSIMO!!!!!');
-            }
-        });
-    };
-
-
-    function bandierine (siglaNazione) {
+    function bandierine (siglaNazione) {  //funzione per trasformare la lingua in bandierine
         console.log(siglaNazione);
         var flag = '';
         if (siglaNazione == 'en') {
@@ -104,7 +77,7 @@ $(document).ready(function () {
         return '<img src="https://www.countryflags.io/' + flag + '/flat/16.png">'
     }
 
-    function stelleVoto (valutazione) {
+    function stelleVoto (valutazione) {    //funzione per trasformare la valutazione in stelline
         var recensione = Math.ceil(valutazione / 2);
         var arrayStelleVoto = [];
         var a = 0;
