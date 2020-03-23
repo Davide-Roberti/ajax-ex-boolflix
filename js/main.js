@@ -15,6 +15,7 @@ $(document).ready(function () {
 
     $('#ricerca').keydown(function(event) {
         var chiaveRicerca = $('#ricerca').val();
+        $('.informazioni-film').empty();
         if(event.keyCode == '13') {
             cercaShow(chiaveRicerca, 'movie');
             cercaShow(chiaveRicerca, 'tv');
