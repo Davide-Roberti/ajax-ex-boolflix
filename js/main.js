@@ -50,6 +50,7 @@ $(document).ready(function () {
                 titoloOriginale: infoShow.original_title,
                 linguaOriginale: bandierine(infoShow.original_language),
                 voto: stelleVoto(infoShow.vote_average),
+                plot: infoShow.overview,
                 copertina: posterCopertina(infoShow.poster_path)
             };
             var specificheShow = template(info);  //collegamento handlebars
